@@ -36,14 +36,14 @@ The LFSR is the engine of randomization. Based on the MASTER/SLAVE role:
 Using the auxiliary polynomial $g(x) = x^3 + x^8$ to "tap" the LFSR into 4-bit arrays:
 
 1.  **Define Source Bits**:
-    * $SY_n = Scr_n[0]$
-    * $SX_n = Scr_n[4] ^ Scr_n[6]$
-    * $SG_n = Scr_n[1] ^ Scr_n[5]$
+    * `SY_n = Scr_n[0]`
+    * `SX_n = Scr_n[4] ^ Scr_n[6]`
+    * `SG_n = Scr_n[1] ^ Scr_n[5]`
 2.  **Generate 4-bit Arrays (e.g., $Sy_n$)**:
-    * $Sy_n[0] = SY_n$
-    * $Sy_n[1] = Scr_n[3] ^ Scr_n[8]$
-    * $Sy_n[2] = Scr_n[6] ^ Scr_n[16]$
-    * $Sy_n[3] = Scr_n[9] ^ Scr_n[14] ^ Scr_n[19] ^ Scr_n[24]$
+    * `Sy_n[0] = SY_n`
+    * `Sy_n[1] = Scr_n[3] ^ Scr_n[8]`
+    * `Sy_n[2] = Scr_n[6] ^ Scr_n[16]`
+    * `Sy_n[3] = Scr_n[9] ^ Scr_n[14] ^ Scr_n[19] ^ Scr_n[24]`
     *(Note: $Sx_n$ and $Sg_n$ follow the same logic using their respective source bits.)*
 
 ### 2.3 Scrambler Octet Generation ($Sc_n[7:0]$)
