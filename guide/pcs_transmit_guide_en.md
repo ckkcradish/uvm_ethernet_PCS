@@ -57,7 +57,7 @@ $Sc_n$ is the final XOR key for data encryption.
 
 ### 2.4 Convolutional Encoder ($cs_n$) and Encoded Data ($Sd_n$)
 1.  **Input Data**: $TXD_n[7:0]$.
-2.  **Scrambling**: $Scrambled\_Data[7:0] = TXD_n[7:0] ^ Sc_n[7:0]$.
+2.  **Scrambling**: $Scrambled\_Data[7:0] =$ `TXD_n[7:0] ^ Sc_n[7:0]`.
 3.  **Generate $cs_n$**: A 3-state machine that updates based on $cs_{n-1}$ and the current scrambled byte.
 4.  **Generate $Sd_n[8:0]$**:
     * $Sd_n[7:0] = Scrambled\_Data[7:0]$.
