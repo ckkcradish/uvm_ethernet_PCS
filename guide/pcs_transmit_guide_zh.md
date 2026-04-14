@@ -121,7 +121,7 @@ $Sc_n$ 是最終用來與資料 XOR 的密鑰。
 2.  **極性隨機反轉 (Polarity Randomization)**:
     為了確保訊號在線路上不會產生直流偏差 (DC bias)，必須隨機反轉這些符號的正負號。這是透過先前準備好的 4-bit 隨機密鑰 $Sg_n[3:0]$ 來達成的。
     詳細機制如下 (1 代表反轉，0 代表維持原樣)：
-    * **Line A**: `A_n = TA_n \times (-1)^{Sg_n[0]}`
+    * **Line A**: $A_n = TA_n \times (-1)^{Sg_n[0]}$
     * **Line B**: `B_n = TB_n \times (-1)^{Sg_n[1]}`
     * **Line C**: `C_n = TC_n \times (-1)^{Sg_n[2]}`
     * **Line D**: `D_n = TD_n \times (-1)^{Sg_n[3]}`
