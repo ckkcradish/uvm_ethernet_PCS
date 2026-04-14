@@ -36,14 +36,14 @@ LFSR 是所有隨機訊號的源頭。根據 Master 或 Slave 身份，公式如
 利用輔助公式 $g(x) = x^3 + x^8$，從 LFSR 的不同位置「抽頭」產生 4-bit 陣列：
 
 1.  **定義源頭 (Source Bits)**:
-    * $SY_n = Scr_n[0]$
-    * $SX_n = Scr_n[4] ^ Scr_n[6]$
-    * $SG_n = Scr_n[1] ^ Scr_n[5]$
+    * `SY_n = Scr_n[0]`
+    * `SX_n = Scr_n[4] ^ Scr_n[6]`
+    * `SG_n = Scr_n[1] ^ Scr_n[5]`
 2.  **生成 4-bit 陣列 (以 $Sy$ 為例)**:
-    * $Sy_n[0] = SY_n$
-    * $Sy_n[1] = g(SY_n) = Scr_n[3] ^ Scr_n[8]$
-    * $Sy_n[2] = g^2(SY_n) = Scr_n[6] ^ Scr_n[16]$
-    * $Sy_n[3] = g^3(SY_n) = Scr_n[9] ^ Scr_n[14] ^ Scr_n[19] ^ Scr_n[24]$
+    * `Sy_n[0] = SY_n`
+    * `Sy_n[1] = Scr_n[3] ^ Scr_n[8]`
+    * `Sy_n[2] = Scr_n[6] ^ Scr_n[16]`
+    * `Sy_n[3] = Scr_n[9] ^ Scr_n[14] ^ Scr_n[19] ^ Scr_n[24]`
     *(註：$Sx_n$ 與 $Sg_n$ 的生成邏輯相同，僅源頭分別替換為 $SX_n$ 與 $SG_n$。)*
 
 ### 2.3 攪亂密鑰生成 ($Sc_n[7:0]$)
@@ -57,10 +57,10 @@ $Sc_n$ 是最終用來與資料 XOR 的密鑰。
 
 ### 2.4 卷積編碼器 ($cs_n$) 與編碼資料 ($Sd_n$)
 1.  **輸入資料**: $TXD_n[7:0]$。
-2.  **資料打亂**: $Scrambled\_Data[7:0] = TXD_n[7:0] ^ Sc_n[7:0]$。
+2.  **資料打亂**: $Scrambled Data[7:0] =$ `TXD_n[7:0] ^ Sc_n[7:0]`。
 3.  **生成 $cs_n$**: 卷積編碼器是一個 3-bit 的狀態機。根據前一拍 $cs_{n-1}$ 和目前的打亂資料，計算出下一拍狀態。
 4.  **生成 $Sd_n[8:0]$**:
-    * $Sd_n[7:0] = Scrambled\_Data[7:0]$。
+    * $Sd_n[7:0] = Scrambled Data[7:0]$。
     * $Sd_n[8]$: 這是卷積編碼器根據 $cs_{n-1}$ 算出的同位檢查位元 (Parity bit)，用於糾錯。
 
 ### 2.5 符號映射與輸出 ($A, B, C, D$)
