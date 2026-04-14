@@ -115,16 +115,25 @@ $Sc_n$ 是最終用來與資料 XOR 的密鑰。
 此階段將 9-bit 數位訊號轉換為要在實體線路傳輸的 4D-PAM5 符號。
 
 1.  **查表轉換 (Base Mapping)**:
-    將 9-bit 的 $Sd_n[8:0]$ 拆分為兩部分：索引值 `$Sd_n[6:8]$` 與 `$Sd_n[5:0]$` 。
-    拿這組索引去對照 IEEE 規範的 Table 40-1 與 Table 40-2，即可得出四個基本五進位符號 $(TA_n, TB_n, TC_n, TD_n)$。符號的數值僅限於 `{+2, +1, 0, -1, -2}` 。
+    將 9-bit 的 $Sd_n[8:0]$ 拆分為兩部分：索引值 $Sd_n[6:8]$ 與 $Sd_n[5:0]$。
+    拿這組索引去對照 IEEE 規範的 Table 40-1 與 Table 40-2，即可得出四個基本五進位符號 $(TA_n, TB_n, TC_n, TD_n)$。符號的數值僅限於 $\{+2, +1, 0, -1, -2\}$。
 
 2.  **極性隨機反轉 (Polarity Randomization)**:
-    為了確保訊號在線路上不會產生直流偏差 (DC bias)，必須隨機反轉這些符號的正負號。這是透過先前準備好的 4-bit 隨機密鑰 $Sg_n[3:0]$ 來達成的。
-    詳細機制如下 (1 代表反轉，0 代表維持原樣)：
-    * **Line A**: $A_n = TA_n \times (-1)^{Sg_n[0]}$
-    * **Line B**: `B_n = TB_n \times (-1)^{Sg_n[1]}`
-    * **Line C**: `C_n = TC_n \times (-1)^{Sg_n[2]}`
-    * **Line D**: `D_n = TD_n \times (-1)^{Sg_n[3]}`
+    為了確保訊號在線路上不會產生直流偏差，且讓接收端能輕易區別資料狀態與非資料狀態，必須利用隨機密鑰 $Sg_n[3:0]$ 以及**極性反轉控制訊號** $Srev_n$ 來共同決定最終的正負號 。
+    
+    * **$Srev_n$ 的條件**: 在 Idle、SSD 與 Carrier Extension 期間，$Srev_n = 1$ (觸發反轉) [cite: 410]；在 Data、CSReset 與 ESD 期間，$Srev_n = 0$。
+    
+    首先，定義每一對線路的符號乘數 ($SnA_n \sim SnD_n$)，這裡的 $\oplus$ 代表 XOR 邏輯：
+    * $SnA_n = +1 \text{ if } (Sg_n[0] \oplus Srev_n) == 0 \text{ else } -1$
+    * $SnB_n = +1 \text{ if } (Sg_n[1] \oplus Srev_n) == 0 \text{ else } -1$
+    * $SnC_n = +1 \text{ if } (Sg_n[2] \oplus Srev_n) == 0 \text{ else } -1$
+    * $SnD_n = +1 \text{ if } (Sg_n[3] \oplus Srev_n) == 0 \text{ else } -1$
+    
+    最後，將基本符號乘上對應的符號乘數，得到最終的輸出符號：
+    * **Line A**: $A_n = TA_n \times SnA_n$
+    * **Line B**: $B_n = TB_n \times SnB_n$
+    * **Line C**: $C_n = TC_n \times SnC_n$
+    * **Line D**: $D_n = TD_n \times SnD_n$
 
 ---
 
