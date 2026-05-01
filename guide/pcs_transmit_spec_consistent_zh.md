@@ -193,7 +193,6 @@ X_n = Scr_n[4]  ^ Scr_n[6]
 Y_n = Scr_n[11] ^ Scr_n[5]
 ```
 
-注意：`Sg_n[0]` 使用的是 `Y_n = Scr_n[11] ^ Scr_n[5]`，不是 `Scr_n[1] ^ Scr_n[5]`。
 
 ---
 
@@ -223,7 +222,7 @@ Sx_n[3] = Scr_n[13] ^ Scr_n[15] ^ Scr_n[18] ^ Scr_n[20]
 ### 3.4 Sg_n[3:0]
 
 ```text
-Sg_n[0] = Scr_n[11] ^ Scr_n[5]
+Sg_n[0] = Scr_n[1] ^ Scr_n[5]
 Sg_n[1] = Scr_n[4]  ^ Scr_n[8]  ^ Scr_n[9]  ^ Scr_n[13]
 Sg_n[2] = Scr_n[7]  ^ Scr_n[11] ^ Scr_n[17] ^ Scr_n[21]
 Sg_n[3] = Scr_n[10] ^ Scr_n[14] ^ Scr_n[15] ^ Scr_n[19]
