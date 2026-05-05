@@ -9,7 +9,7 @@ class pcs_sequence extends uvm_sequence(#pcs_item)
  rand int packet_num;
 
  constraint num_packets_c {
-    packet_num inside {[1:10]};
+    packet_num inside {[4:20]};
   }
 
 function new(string name = "pcs_sequence");
@@ -20,16 +20,16 @@ endfunction
 virtual task body();
   pcs_item my_item;
 
-  assert(this.randomize())
-      else `uvm_fatal("SEQ_RAND", "pcs_psequence randomization failed")
+  if(!this.randomize())
+       `uvm_error("SEQ_RAND", "pcs_sequence randomization failed")
 
   repeat(packet_num) begin 
     my_item = pcs_item::type_id::create("my_item");
 
      start_item(my_item);
 
-      assert(my_item.randomize())
-       else `uvm_fatal("ITEM_RAND", "pcs_item randomization failed")
+      if(!my_item.randomize())
+        `uvm_error("ITEM_RAND", "pcs_item randomization failed")
 
      finish_item(my_item);
   end 
