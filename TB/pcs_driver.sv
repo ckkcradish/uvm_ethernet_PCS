@@ -39,12 +39,12 @@ endfunction
 
 
      foreach(my_item.data[i]) begin
-         @(posedge vif.cb_dr);
+         @(vif.cb_dr);
          vif.cb_dr.enc_in<= {1'b0, my_item.data[i]};
      end
 
      repeat(my_item.gap_incycles)begin
-        @(posedge vif.cb_dr);
+        @(vif.cb_dr);
         vif.cb_dr.enc_in<={1'b1, 8'd0};
      end
 
