@@ -20,6 +20,6 @@ endclocking
 
 modport DRV(clocking cb_dr, input clk);
 modport MON(clocking cb_mon, input clk);
-modport DUT(input clk,rst_n,enc_in,enc_out);
+modport DUT(input clk, input rst_n, input enc_in,output enc_out);
 
 endinterface
