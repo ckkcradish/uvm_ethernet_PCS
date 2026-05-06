@@ -48,5 +48,7 @@ endfunction
         vif.cb_dr.enc_in<={1'b1, 8'd0};
      end
 
+   endtask
+
 
 endclass
