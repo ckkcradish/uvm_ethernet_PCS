@@ -1,6 +1,7 @@
 import uvm_pkg::*;
  `include "uvm_macros.svh"
  `include "pcs_if.sv"
+ `include "pcs_monitem.sv"
 
 class pcs_monitor extends uvm_monitor;
  `uvm_component_utils(pcs_monitor)
