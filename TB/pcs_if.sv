@@ -1,7 +1,6 @@
 interface pcs_if(input logic clk);
 
 logic rst_n;
-
 logic [8:0] enc_in;
 logic [11:0] enc_out;
 
