@@ -3,7 +3,7 @@ import uvm_pkg::*;
 
 class pcs_monitem extends uvm_sequence_item;
 
- bit Reset;
+ bit rst_n;
  bit [7:0] Din;
  bit TX_EN;
  bit [3:0][2:0] Dout;

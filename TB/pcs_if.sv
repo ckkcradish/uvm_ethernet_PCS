@@ -1,19 +1,19 @@
 interface pcs_if(input logic Clk);
 
-  logic Reset;
+  logic rst_n;
   logic [7:0] Din;
   logic TX_EN;
   logic [3:0][2:0] Dout;
 
   clocking cb_dr @(posedge Clk);
-    output Reset;
+    output rst_n;
     output Din;
     output TX_EN;
     input  Dout;
   endclocking
 
   clocking cb_mon @(posedge Clk);
-    input Reset;
+    input rst_n;
     input Din;
     input TX_EN;
     input Dout;
@@ -24,7 +24,7 @@ interface pcs_if(input logic Clk);
 
   modport DUT(
     input  Clk,
-    input  Reset,
+    input  rst_n,
     input  Din,
     input  TX_EN,
     output Dout
